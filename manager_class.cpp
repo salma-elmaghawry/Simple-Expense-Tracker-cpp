@@ -1,40 +1,11 @@
 #include "expense_class.cpp"
 #include "food_expense.cpp"
 #include "transport_expense.cpp"
-#include "custom_expense.cpp"
-#include <map>
 class ExpenseManager {
 private:
     vector<Expense*> expenses;
-    map<int, string> categories;  // Map to store category ID and name
-    int categoryCount;  // Counter for dynamic categories
 
 public:
-    ExpenseManager() {
-        categoryCount = 3;  // Start from 3 (1=Food, 2=Transport)
-        categories[1] = "Food";
-        categories[2] = "Transport";
-    }
-
-    void addCategory() {
-        string categoryName;
-        cout << "Enter new category name: ";
-        cin.ignore();
-        getline(cin, categoryName);
-
-        categoryCount++;
-        categories[categoryCount] = categoryName;
-
-        cout << "Category '" << categoryName << "' added successfully with ID: " << categoryCount << endl;
-    }
-
-    void viewCategories() {
-        cout << "\n===== Available Categories =====\n";
-        for (auto& cat : categories) {
-            cout << cat.first << ". " << cat.second << endl;
-        }
-    }
-
     void addExpense() {
         int type;
         float amount;
@@ -73,8 +44,8 @@ public:
 
     void totalSpending() {
         float total = 0;
-        for (auto e : expenses) {
-            total += e->getAmount();
+        for (int i = 0; i < expenses.size(); i++) {
+            total += expenses[i]->getAmount();
         }
         cout << "Total Spending: " << total << endl;
     }
@@ -97,8 +68,8 @@ public:
 
     // Destructor to free memory
     ~ExpenseManager() {
-        for (auto e : expenses) {
-            delete e;
+        for (int i = 0; i < expenses.size(); i++) {
+            delete expenses[i];
         }
     }
 };

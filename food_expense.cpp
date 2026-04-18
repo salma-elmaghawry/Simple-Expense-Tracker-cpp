@@ -7,7 +7,7 @@ public:
     FoodExpense(float amt, string desc)
         : Expense(amt, desc) {}
 
-    void display() override {
+    void display() {
         cout << "[Food] ";
         Expense::display();
         cout << endl;
